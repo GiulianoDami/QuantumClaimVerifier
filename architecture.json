@@ -1,0 +1,37 @@
+{
+    "language": "C++",
+    "dependency_file": "CMakeLists.txt",
+    "dependencies": ["Boost.Test", "Eigen3"],
+    "files": [
+        {
+            "path": "src/core/QuantumClaim.h",
+            "description": "Defines the structure for quantum claims and their validation parameters",
+            "exports": ["class QuantumClaim", "struct ValidationResult"]
+        },
+        {
+            "path": "src/core/StatisticalValidator.h",
+            "description": "Implements statistical tests for validating quantum speedups",
+            "exports": ["class StatisticalValidator", "double perform_t_test(const std::vector<double>&, const std::vector<double>&)"]
+        },
+        {
+            "path": "src/core/ReplicationAnalyzer.h",
+            "description": "Analyzes replication studies to detect inconsistencies",
+            "exports": ["class ReplicationAnalyzer", "bool check_replicability(const std::vector<std::vector<double>>& data)"]
+        },
+        {
+            "path": "src/io/ClaimParser.h",
+            "description": "Parses input JSON files into internal structures",
+            "exports": ["class ClaimParser", "QuantumClaim parse_json(const std::string& filename)"]
+        },
+        {
+            "path": "src/main.cpp",
+            "description": "Main entry point of the application with CLI argument parsing",
+            "imports_from_other_files": ["core/QuantumClaim.h", "core/StatisticalValidator.h", "core/ReplicationAnalyzer.h", "io/ClaimParser.h"]
+        },
+        {
+            "path": "src/utils/ConfidenceScorer.h",
+            "description": "Calculates confidence scores based on validation results",
+            "exports": ["class ConfidenceScorer", "double calculate_confidence(const ValidationResult& result)"]
+        }
+    ]
+}
